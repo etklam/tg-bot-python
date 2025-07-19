@@ -1,14 +1,10 @@
+# Python 相關
 __pycache__
 *.pyc
 *.pyo
 *.pyd
 .Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
+*.so
 .coverage
 .coverage.*
 .cache
@@ -16,12 +12,76 @@ nosetests.xml
 coverage.xml
 *.cover
 *.log
-.git
-.gitignore
-.mypy_cache
-.pytest_cache
-.hypothesis
-.env
-.DS_Store
+
+# 虛擬環境
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 包管理
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# IDE 和編輯器
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# 作業系統
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker 相關
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# 環境變數和配置
+.env
+.env.*
+!.env.example
+
+# 文檔和說明
+README.md
+*.md
+docs/
+*.txt
+!requirements.txt
+
+# 測試和開發工具
+tests/
+test_*
+*_test.py
+.pytest_cache/
+htmlcov/
+
+# 日誌和臨時文件
+logs/
+*.log
+tmp/
+temp/
+
+# 備份文件
+*.bak
+*.backup
+*.old

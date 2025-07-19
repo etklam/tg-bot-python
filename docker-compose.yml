@@ -1,15 +1,20 @@
 version: '3.8'
 
 services:
-  tg-bot:
-    build: .
-    container_name: tg-bot-test-container
+  telegram-bot:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: telegram-bot-api
     ports:
-      - "8000:8000"
+      - "${PORT:-8000}:8000"
     env_file:
-      - caprover.env
-    environment:
-      - PORT=8000
+      - .env8000
+      - HOST=0.0.0.0
+    volumes:
+      # 僅在開發環境中掛載代碼（可選）
+      # - ./app:/app/app:ro
+      - /app/logs  # 日誌卷
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
@@ -18,8 +23,30 @@ services:
       start_period: 40s
     restart: unless-stopped
     networks:
-      - tg-bot-network
+      - telegram-bot-network
+    # 資源限制
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    # 安全設置
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/logs
 
 networks:
-  tg-bot-network:
+  telegram-bot-network:
     driver: bridge
+    name: telegram-bot-network
+
+# 可選：添加卷來持久化日誌
+volumes:
+  logs:
+    driver: local
