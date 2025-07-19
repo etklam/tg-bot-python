@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  tg-bot:
+    build: .
+    container_name: tg-bot-test-container
+    ports:
+      - "8000:8000"
+    env_file:
+      - caprover.env
+    environment:
+      - PORT=8000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - tg-bot-network
+
+networks:
+  tg-bot-network:
+    driver: bridge

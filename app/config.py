@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings:
-    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-    API_PASSWORD = os.getenv("API_PASSWORD")
+    TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", '5398594893:AAFvCbyDA4ZAoRy0nJ8dz_Vbja_HhSSwkhk')
+    API_PASSWORD = os.getenv("API_PASSWORD", 'Ihave2jj')
     HOST = os.getenv("HOST", "0.0.0.0")
     PORT = int(os.getenv("PORT", 8000))
     
